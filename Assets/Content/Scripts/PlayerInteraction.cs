@@ -7,6 +7,7 @@ public class PlayerInteraction : MonoBehaviour
     public float InteractionDistance = 3f;
     public GameObject InteractionText;
     private InteractObject currentInteractable;
+
     // Update is called once per frame
     void Update()
     {
