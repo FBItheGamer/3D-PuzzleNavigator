@@ -1,47 +1,33 @@
 using System;
+using NUnit.Framework;
 using Unity.VisualScripting;
 using UnityEngine;
 
 public class DoorController : MonoBehaviour
 {
-    public GameObject Door;
-    public GameObject OpenDoor;
-    public GameObject Keycard;
-    public String ItemID = "keycard";
-    private PlayerInventory inventory;
+    public string KeycardID;
     private bool isOpen = false;
-
+    private Animator animator;
+    //private MySingletonClass mySingletonClass;
     void Start()
     {
-        if (Door != null && OpenDoor != null)
-        {
-            Door.SetActive(!isOpen);
-            OpenDoor.SetActive(isOpen);
-        }
+        animator = GetComponent<Animator>();
+        animator.SetBool("isOpen", false);
     }
 
-    public void Open(String ItemID)
+    public void OpenAndClose()
     {
-        // Keycard needs to be within the inventory and looked for
-        if (Door != null && OpenDoor != null)
+        if (isOpen == false)
         {
-            if (inventory.HasItem(ItemID))
-            {
-                Door.SetActive(isOpen);
-                OpenDoor.SetActive(!isOpen);
-            }
-
-
+            isOpen = true;
+            animator.SetBool("isOpen", true);
+            Debug.Log("Door Opened");
         }
-    }
-
-    public void Close()
-    {
-        // Keycard needs to be within the inventory and need to check for it
-        if (Door != null && OpenDoor != null)
+        else if (isOpen == true)
         {
-            Door.SetActive(!isOpen);
-            OpenDoor.SetActive(isOpen);
+            isOpen = false;
+            animator.SetBool("isOpen", false);
+            Debug.Log("Door Closed");
         }
     }
 }
