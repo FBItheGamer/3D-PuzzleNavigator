@@ -8,7 +8,6 @@ public class DoorController : MonoBehaviour
     public string KeycardID;
     private bool isOpen = false;
     private Animator animator;
-    //private MySingletonClass mySingletonClass;
     void Start()
     {
         animator = GetComponent<Animator>();

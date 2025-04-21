@@ -66,7 +66,7 @@ namespace MTE
         {
             get { return selectedDetail.MinScale; }
         }
-        
+
         private Vector3 maxScale
         {
             get { return selectedDetail.MaxScale; }
@@ -81,7 +81,7 @@ namespace MTE
         private int containerInstanceId;
 
         private List<ObjectDetail> detailList = new List<ObjectDetail>();
-        
+
 
         /// <summary>
         /// Selected object detail index
@@ -213,7 +213,7 @@ namespace MTE
                 }
             }
         }
-        
+
         public bool AllowOverlap
         {
             get
@@ -263,7 +263,7 @@ namespace MTE
 
             Instance = this;
         }
-        
+
         public HashSet<Hotkey> DefineHotkeys()
         {
             return new HashSet<Hotkey>
@@ -373,7 +373,7 @@ namespace MTE
                 return;
             }
 
-            if(!UseRandomDirection && e.control)
+            if (!UseRandomDirection && e.control)
             {
                 RaycastHit hit;
                 Ray ray1 = HandleUtility.GUIPointToWorldRay(e.mousePosition);
@@ -488,7 +488,7 @@ namespace MTE
                             this.BrushSizeInU3D,
                             this.BrushNumber,
                             ref targetPositions);
-                        
+
                         CreateObjectInstances();
                     }
                     else
@@ -589,7 +589,8 @@ namespace MTE
             }
             else//loop through all object listed in detail
             {
-                var objects = UnityEngine.Object.FindObjectsOfType<GameObject>();
+                var objects = Object.FindObjectsByType<GameObject>(FindObjectsSortMode.None);
+
                 foreach (var o in objects)
                 {
                     if (gameObject == o)
@@ -603,7 +604,7 @@ namespace MTE
                         {
                             continue;
                         }
-                        
+
                         Bounds existingObjectBounds = GetBounds(o);
                         if (existingObjectBounds.Intersects(bounds))
                         {
@@ -691,13 +692,13 @@ namespace MTE
                     createdInstances.Add(o);
                 }
             }
-            
+
             Undo.UndoRedoManager.Instance().Push(a =>
             {
                 UndoCreate(a);
             }, createdInstances);
         }
-        
+
         private void RemoveObjectInstances(List<GameObject> itemsRemoved)
         {
             List<ObjectPainterUndoData> removedObjects
@@ -727,7 +728,7 @@ namespace MTE
 
                 removedObjects.Add(undoData);
             }
-            
+
             Undo.UndoRedoManager.Instance().Push(a =>
             {
                 RedoCreate(a);
@@ -750,7 +751,7 @@ namespace MTE
                 o.transform.localScale = undoData.localScale;
                 createdInstances.Add(o);
             }
-            
+
             Undo.UndoRedoManager.Instance().Push(a =>
             {
                 UndoCreate(a);
@@ -801,22 +802,22 @@ namespace MTE
 
         private void ChangeDirection(float delta, ref float direction)
         {
-            if(delta > 0)
+            if (delta > 0)
             {
                 direction -= Mathf.PI / 12;
             }
-            else if(delta < 0)
+            else if (delta < 0)
             {
                 direction += Mathf.PI / 12;
             }
 
-            if(direction < 0)
+            if (direction < 0)
             {
-                direction += 2*Mathf.PI;
+                direction += 2 * Mathf.PI;
             }
-            if (direction > 2*Mathf.PI)
+            if (direction > 2 * Mathf.PI)
             {
-                direction -= 2*Mathf.PI;
+                direction -= 2 * Mathf.PI;
             }
         }
 
