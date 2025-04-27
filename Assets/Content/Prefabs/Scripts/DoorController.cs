@@ -1,4 +1,4 @@
-<<<<<<< HEAD:Assets/Content/Scripts/DoorController.cs
+<<<<<<<< HEAD:Assets/Content/Scripts/DoorController.cs
 using System;
 using NUnit.Framework;
 using Unity.VisualScripting;
@@ -32,7 +32,7 @@ public class DoorController : MonoBehaviour
         }
     }
 }
-=======
+========
 using System;
 using NUnit.Framework;
 using Unity.VisualScripting;
@@ -65,4 +65,4 @@ public class DoorController : MonoBehaviour
         }
     }
 }
->>>>>>> FBX_Tests:Assets/Content/Prefabs/Scripts/DoorController.cs
+>>>>>>>> FBX_Tests:Assets/Content/Prefabs/Scripts/DoorController.cs
