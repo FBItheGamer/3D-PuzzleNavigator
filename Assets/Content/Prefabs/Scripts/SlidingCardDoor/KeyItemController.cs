@@ -6,6 +6,8 @@ namespace KeySystem
   {
     [SerializeField] private bool redDoor = false;
     [SerializeField] private bool redKey = false;
+    [SerializeField] private bool amberDoor = false;
+    [SerializeField] private bool amberKey = false;
     [SerializeField] private KeyInventory _keyInventory = null;
 
     private KeyDoorController doorObject;
@@ -13,6 +15,10 @@ namespace KeySystem
     private void Start()
     {
       if (redDoor)
+      {
+        doorObject = GetComponent<KeyDoorController>();
+      }
+      if (amberDoor)
       {
         doorObject = GetComponent<KeyDoorController>();
       }
@@ -25,6 +31,15 @@ namespace KeySystem
         doorObject.PlayAnimation();
       }
       else if (redKey)
+      {
+        _keyInventory.hasRedKey = true;
+        gameObject.SetActive(false);
+      }
+      if (amberDoor)
+      {
+        doorObject.PlayAnimation();
+      }
+      else if (amberKey)
       {
         _keyInventory.hasRedKey = true;
         gameObject.SetActive(false);
