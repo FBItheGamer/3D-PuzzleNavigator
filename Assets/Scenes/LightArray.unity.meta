@@ -1,6 +1,11 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Scenes/LightArray.unity.meta
 guid: 8403a2e6a7a436e418323c90a0075c1c
 DefaultImporter:
+========
+guid: dc7b58c9e3ad5a347a7d49f7f5d96d12
+PrefabImporter:
+>>>>>>>> main:Assets/Content/Prefabs/Small Maze.prefab.meta
   externalObjects: {}
   userData: 
   assetBundleName: 
