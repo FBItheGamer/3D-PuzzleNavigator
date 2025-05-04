@@ -22,7 +22,6 @@ namespace KeySystem
       {
         doorObject = GetComponent<KeyDoorController>();
       }
-
     }
     public void ObjectInteraction()
     {

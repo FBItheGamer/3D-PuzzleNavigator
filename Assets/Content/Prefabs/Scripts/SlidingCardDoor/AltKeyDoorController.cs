@@ -1,20 +1,17 @@
 using System.Collections;
-using System.Numerics;
-using Unity.VisualScripting;
 using UnityEngine;
 
 namespace KeySystem
 {
-  public class KeyDoorController : MonoBehaviour
+  public class AltKeyDoorController : MonoBehaviour
   {
     private Animator doorAnim;
     private bool doorOpen = false;
 
-    private bool altDoor = false;
-
     [Header("Animation Names")]
     [SerializeField] private string openAnimationName = "DoorOpen";
     [SerializeField] private string closeAnimationName = "DoorClose";
+
     [SerializeField] private int timeToShowUI = 1;
     [SerializeField] private GameObject showDoorLockedUI = null;
     [SerializeField] private KeyInventory _keyInventory = null;
@@ -23,10 +20,9 @@ namespace KeySystem
 
     [Header("Slide Settings")]
     [SerializeField] private float slideXOffset = 2f;
-    [SerializeField] private float slideZOffset = 2f;
     [SerializeField] private float slideSpeed = 2f;
 
-    private UnityEngine.Vector3 closedPosition;
+    private Vector3 closedPosition;
 
     private void Awake()
     {
@@ -59,7 +55,7 @@ namespace KeySystem
       {
         doorAnim.Play(openAnimationName, 0, 0.0f);
 
-        UnityEngine.Vector3 openPosition = closedPosition + new UnityEngine.Vector3(0, 0, slideZOffset);
+        Vector3 openPosition = closedPosition + new Vector3(slideXOffset, 0, 0);
         StartCoroutine(SlideDoor(openPosition));
 
         doorOpen = true;
@@ -75,14 +71,14 @@ namespace KeySystem
       }
     }
 
-    IEnumerator SlideDoor(UnityEngine.Vector3 targetPosition)
+    IEnumerator SlideDoor(Vector3 targetPosition)
     {
-      UnityEngine.Vector3 startPos = transform.position;
+      Vector3 startPos = transform.position;
       float elapsed = 0f;
 
       while (elapsed < 1f)
       {
-        transform.position = UnityEngine.Vector3.Lerp(startPos, targetPosition, elapsed);
+        transform.position = Vector3.Lerp(startPos, targetPosition, elapsed);
         elapsed += Time.deltaTime * slideSpeed;
         yield return null;
       }
