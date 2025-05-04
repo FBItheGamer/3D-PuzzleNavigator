@@ -2271,7 +2271,7 @@ MonoBehaviour:
   timeToShowUI: 1
   showDoorLockedUI: {fileID: 725338431}
   waitTimer: 1
-  slideOffset: {x: -2, y: 0, z: 0}
+  slideOffset: {x: -2.3, y: 0, z: 0}
   slideSpeed: 2
 --- !u!114 &146312516
 MonoBehaviour:
@@ -6914,7 +6914,7 @@ MonoBehaviour:
   timeToShowUI: 1
   showDoorLockedUI: {fileID: 1378361903}
   waitTimer: 1
-  slideOffset: {x: 2, y: 0, z: 0}
+  slideOffset: {x: 2.3, y: 0, z: 0}
   slideSpeed: 2
 --- !u!114 &529993904
 MonoBehaviour:
@@ -10661,7 +10661,7 @@ MonoBehaviour:
   timeToShowUI: 1
   showDoorLockedUI: {fileID: 1631029309}
   waitTimer: 1
-  slideOffset: {x: 0, y: 0, z: 2}
+  slideOffset: {x: 0, y: 0, z: 2.3}
   slideSpeed: 2
 --- !u!114 &820841166
 MonoBehaviour:
@@ -13751,7 +13751,7 @@ MonoBehaviour:
   timeToShowUI: 1
   showDoorLockedUI: {fileID: 2059285496}
   waitTimer: 1
-  slideOffset: {x: 0, y: 0, z: -2}
+  slideOffset: {x: 0, y: 0, z: -2.3}
   slideSpeed: 2
 --- !u!114 &1032588928
 MonoBehaviour:
@@ -23547,7 +23547,7 @@ MonoBehaviour:
   timeToShowUI: 1
   showDoorLockedUI: {fileID: 342538608}
   waitTimer: 1
-  slideOffset: {x: -2, y: 0, z: 0}
+  slideOffset: {x: -2.3, y: 0, z: 0}
   slideSpeed: 2
 --- !u!95 &1765829586
 Animator:
