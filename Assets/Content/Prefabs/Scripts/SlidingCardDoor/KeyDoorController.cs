@@ -1,6 +1,4 @@
 using System.Collections;
-using System.Numerics;
-using Unity.VisualScripting;
 using UnityEngine;
 
 namespace KeySystem
@@ -10,23 +8,25 @@ namespace KeySystem
     private Animator doorAnim;
     private bool doorOpen = false;
 
-    private bool altDoor = false;
-
     [Header("Animation Names")]
     [SerializeField] private string openAnimationName = "DoorOpen";
     [SerializeField] private string closeAnimationName = "DoorClose";
+
+    [Header("Key Settings")]
+    [SerializeField] private string requiredKey = "RedKey";
+    [SerializeField] private KeyInventory _keyInventory = null;
+
+    [Header("UI & Delay")]
     [SerializeField] private int timeToShowUI = 1;
     [SerializeField] private GameObject showDoorLockedUI = null;
-    [SerializeField] private KeyInventory _keyInventory = null;
     [SerializeField] private int waitTimer = 1;
-    [SerializeField] private bool pauseInteraction = false;
 
     [Header("Slide Settings")]
-    [SerializeField] private float slideXOffset = 2f;
-    [SerializeField] private float slideZOffset = 2f;
+    [SerializeField] private Vector3 slideOffset = new Vector3(0f, 0f, 2f); // choose direction here
     [SerializeField] private float slideSpeed = 2f;
 
-    private UnityEngine.Vector3 closedPosition;
+    private bool pauseInteraction = false;
+    private Vector3 closedPosition;
 
     private void Awake()
     {
@@ -34,16 +34,9 @@ namespace KeySystem
       closedPosition = transform.position;
     }
 
-    private IEnumerator PauseDoorInteraction()
-    {
-      pauseInteraction = true;
-      yield return new WaitForSeconds(waitTimer);
-      pauseInteraction = false;
-    }
-
     public void PlayAnimation()
     {
-      if (_keyInventory.hasRedKey)
+      if (_keyInventory != null && _keyInventory.HasKey(requiredKey))
       {
         OpenDoor();
       }
@@ -53,36 +46,38 @@ namespace KeySystem
       }
     }
 
-    void OpenDoor()
+    private void OpenDoor()
     {
-      if (!doorOpen && !pauseInteraction)
+      if (!pauseInteraction)
       {
-        doorAnim.Play(openAnimationName, 0, 0.0f);
+        pauseInteraction = true;
 
-        UnityEngine.Vector3 openPosition = closedPosition + new UnityEngine.Vector3(0, 0, slideZOffset);
-        StartCoroutine(SlideDoor(openPosition));
+        if (!doorOpen)
+        {
+          doorAnim.Play(openAnimationName);
+          Vector3 openPos = closedPosition + slideOffset;
+          StartCoroutine(SlideDoor(openPos));
+          doorOpen = true;
+        }
+        else
+        {
+          doorAnim.Play(closeAnimationName);
+          StartCoroutine(SlideDoor(closedPosition));
+          doorOpen = false;
+        }
 
-        doorOpen = true;
-        StartCoroutine(PauseDoorInteraction());
-      }
-      else if (doorOpen && !pauseInteraction)
-      {
-        doorAnim.Play(closeAnimationName, 0, 0.0f);
-        StartCoroutine(SlideDoor(closedPosition));
-
-        doorOpen = false;
         StartCoroutine(PauseDoorInteraction());
       }
     }
 
-    IEnumerator SlideDoor(UnityEngine.Vector3 targetPosition)
+    private IEnumerator SlideDoor(Vector3 targetPosition)
     {
-      UnityEngine.Vector3 startPos = transform.position;
+      Vector3 startPos = transform.position;
       float elapsed = 0f;
 
       while (elapsed < 1f)
       {
-        transform.position = UnityEngine.Vector3.Lerp(startPos, targetPosition, elapsed);
+        transform.position = Vector3.Lerp(startPos, targetPosition, elapsed);
         elapsed += Time.deltaTime * slideSpeed;
         yield return null;
       }
@@ -90,7 +85,7 @@ namespace KeySystem
       transform.position = targetPosition;
     }
 
-    IEnumerator ShowDoorLocked()
+    private IEnumerator ShowDoorLocked()
     {
       if (showDoorLockedUI != null)
       {
@@ -98,6 +93,12 @@ namespace KeySystem
         yield return new WaitForSeconds(timeToShowUI);
         showDoorLockedUI.SetActive(false);
       }
+    }
+
+    private IEnumerator PauseDoorInteraction()
+    {
+      yield return new WaitForSeconds(waitTimer);
+      pauseInteraction = false;
     }
   }
 }
