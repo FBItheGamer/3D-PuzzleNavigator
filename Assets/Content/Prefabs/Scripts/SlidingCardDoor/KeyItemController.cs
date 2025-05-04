@@ -4,32 +4,27 @@ namespace KeySystem
 {
   public class KeyItemController : MonoBehaviour
   {
-    [SerializeField] private bool redDoor = false;
-    [SerializeField] private bool redKey = false;
+    [Header("Key Pickup Settings")]
+    [SerializeField] private bool isKeyItem = false;
+    [SerializeField] private string keyName = "RedKey";
     [SerializeField] private KeyInventory _keyInventory = null;
 
-    private KeyDoorController doorObject;
+    [Header("Door Control (If this is a Door)")]
+    [SerializeField] private bool isDoor = false;
+    [SerializeField] private KeyDoorController doorController;
 
-    private void Start()
-    {
-      if (redDoor)
-      {
-        doorObject = GetComponent<KeyDoorController>();
-      }
-
-    }
     public void ObjectInteraction()
     {
-      if (redDoor)
+      if (isKeyItem && _keyInventory != null)
       {
-        doorObject.PlayAnimation();
-      }
-      else if (redKey)
-      {
-        _keyInventory.hasRedKey = true;
+        _keyInventory.AddKey(keyName);
+        Debug.Log($"🔑 Collected key: {keyName}");
         gameObject.SetActive(false);
+      }
+      else if (isDoor && doorController != null)
+      {
+        doorController.PlayAnimation();
       }
     }
   }
-
 }
