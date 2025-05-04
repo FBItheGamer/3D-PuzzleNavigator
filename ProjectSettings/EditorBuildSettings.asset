@@ -11,12 +11,15 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/UI/Menu.unity
     guid: 2a42310b74e051e49b6599fea1d58278
-  - enabled: 1
+  - enabled: 0
     path: Assets/UI/Controls.unity
     guid: 4c4cdbe13559ddc47a6926d0fb9664c3
   - enabled: 1
     path: Assets/Scenes/Terrain.unity
     guid: 6b6d8f90cd48c3d4db821d3cefda0a83
+  - enabled: 1
+    path: Assets/UI/End Screen.unity
+    guid: a2f8fe65a167d2247a1fdff44aa32730
   - enabled: 1
     path: Assets/Scenes/LightArray.unity
     guid: 8403a2e6a7a436e418323c90a0075c1c
