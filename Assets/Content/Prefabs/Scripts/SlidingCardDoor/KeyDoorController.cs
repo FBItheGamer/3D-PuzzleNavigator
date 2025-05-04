@@ -22,7 +22,7 @@ namespace KeySystem
     [SerializeField] private int waitTimer = 1;
 
     [Header("Slide Settings")]
-    [SerializeField] private float slideZOffset = 2f;
+    [SerializeField] private Vector3 slideOffset = new Vector3(0f, 0f, 2f); // choose direction here
     [SerializeField] private float slideSpeed = 2f;
 
     private bool pauseInteraction = false;
@@ -55,7 +55,7 @@ namespace KeySystem
         if (!doorOpen)
         {
           doorAnim.Play(openAnimationName);
-          Vector3 openPos = closedPosition + new Vector3(0, 0, slideZOffset);
+          Vector3 openPos = closedPosition + slideOffset;
           StartCoroutine(SlideDoor(openPos));
           doorOpen = true;
         }
