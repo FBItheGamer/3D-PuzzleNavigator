@@ -3,7 +3,22 @@ guid: e736eda088adc1848808c57d5bec05b7
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: frameLamb
+    second: {fileID: 2100000, guid: c22f34f2b610fc242b503294cca1dc90, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: light4
+    second: {fileID: 2100000, guid: 5b50503dab1ecac4bac6367a50cb0839, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lightEdge
+    second: {fileID: 2100000, guid: 8169a11df669df848b9aad522eac51e0, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
